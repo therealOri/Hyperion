@@ -1,3 +1,8 @@
+This is a maintained fork of Hyperion. This fork's purpose is to allow you to use Hyperion from the terminal and NOT have it be buggy/broken. I tried to push my updates but they were rejected and it seems billy doesn't care about the TUI (Terminal User Interface) functionality. I plan on maintaining this repo with patches that allow you to be able to use it on Linux and Mac alongside of Windows, and try to keep things smooth.
+
+If you want to support me, You can check out my [profile](https://github.com/therealOri) and at the bottom of the README is my CashApp <3
+You can also star this repo and show me that you enjoy what I do! Anything helps and is very appeciated.
+
 -----
 
 <p align="center">
