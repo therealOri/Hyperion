@@ -1,1 +1,1 @@
-print("discord.gg/plague")
+print("https://therealori.tk")
