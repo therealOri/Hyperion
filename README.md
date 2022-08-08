@@ -26,7 +26,7 @@ very compact (one file) and executable on any os/python version. (This fork make
 You can also use the <a href="https://obf.plague.fun" target="_blank">web</a> version of Hyperion.
 <br><br><br>
 </strong>
-<img src="https://cdn.discordapp.com/attachments/939091668261556304/991416492665098261/Capture_decran_2022-06-28_205449.jpg" width="1202", height="642">
+<img src="https://media.discordapp.net/attachments/983792563750322199/1006287370880045228/Linux_TUI_Hyperion.png" width="1202", height="642">
 </p>
 <br>
 
