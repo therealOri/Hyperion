@@ -1,3 +1,5 @@
+# Custom Fork
+#https://github.com/therealOri/Hyperion
 import platform
 from builtins import *
 
@@ -11,7 +13,6 @@ from io import BytesIO
 from re import findall
 
 from random import choice, shuffle, randint
-
 from zlib import compress
 
 
@@ -55,7 +56,7 @@ class Hyperion:
         >>> # [!!!] No bugs [!!!]
         """
 
-        
+
         if ultrasafemode == True:
             randlines, shell, renlibs, renvars = False, False, False, False
 
@@ -147,8 +148,7 @@ try:
     if (
         __obfuscator__ != "Hyperion" or
         __authors__ != ("therealOri", "billythegoat356", "BlueRed") or
-        __github__ != "https://github.com/billythegoat356/Hyperion" or
-        __discord__ != "https://discord.gg/plague" or
+        __github__ != "https://github.com/therealOri/Hyperion" or
         __license__ != "EPL-2.0" or
         __code__ != 'print("Hello world!")'
     ):
@@ -188,7 +188,7 @@ except:
 
         self.local_import = f"locals()['{self.globals}']=globals"
         self.impcontent = impcontent
-        
+
     def RenameImports(self):
         _imports = self._gather_imports()
         if _imports == False:
@@ -225,7 +225,7 @@ except:
         for token in self.tokens:
             string, type = token.string, token.type
 
-            
+
             if type == 1:
                 if (
                     ((self.tokens[self.tokens.index(token)+1].string == '=' and self._is_not_arg(string)) or
@@ -246,13 +246,13 @@ except:
                         string = self.imports[string]
                 else:
                     passed.append(string)
-            
+
             ntokens.append(TokenInfo(type, string, token.start, token.end, token.line))
-            
+
 
 
         self.content = untokenize(ntokens).decode('utf-8')
- 
+
     def ObfContent(self):
         f = BytesIO(self.content.encode('utf-8'))
         self.tokens = list(tokenize(f.readline))
@@ -289,14 +289,14 @@ except:
         self.content = untokenize(ntokens).decode('utf-8')
 
     def CleanCode(self):
-            
+
             self.RemoveComments()
             self.CompressCode()
 
     def RandLines(self):
         content = []
         lines = self.content.splitlines()
-    
+
         for lin, nextlin in zip(lines, range(len(lines))):
             content.append(lin)
             if (
@@ -317,7 +317,7 @@ except:
         chunks = [f"""{self._protect_var(self.eval)}({self._protect_var(self.compile)}({self._protect(chunk, char=2)},filename={self._protect(self._randvar())},mode={self._protect('eval')}))""" for chunk in chunks]
 
         self.content = '\n'.join(chunks)
-        
+
     def Organise(self):
         gd_vars = [f"{self.globals}()[{self._protect(self.getattr, basic=True, )}]=getattr", f"{self.globals}()[{self._protect(self.dir, basic=True)}]=dir"]
         shuffle(gd_vars)
@@ -331,7 +331,7 @@ except:
         eval_var = f"globals()['{self._hex('eval')}']"
         str_var = f"globals()['{self._hex('str')}']"
         compile_var = f"globals()['{self._hex('compile')}']"
-        
+
         arg1, arg2 = self._randvar(), self._randvar()
         lambda1 = f"""(lambda {arg1}:{eval_var}({compile_var}({str_var}("{self._hex(eval_var)}({arg1})"),filename='{self._hex(self._randvar())}',mode='{self._hex('eval')}')))"""
         lambda2 = f"(lambda {arg1}:{arg1}(__import__('{self._hex('zlib')}')))"
@@ -362,7 +362,7 @@ except:
         all_keys = keys
 
         all_keys.update(keys2)
-    
+
         self.content = ['from builtins import *', ','.join(all_keys.values()) + '=' + ','.join(all_keys.keys()), exec_content]
 
 
@@ -421,8 +421,7 @@ from math import prod as {gen[5]}
 
 __obfuscator__ = 'Hyperion'
 __authors__ = ('therealOri', 'billythegoat356', 'BlueRed')
-__github__ = 'https://github.com/billythegoat356/Hyperion'
-__discord__ = 'https://discord.gg/plague'
+__github__ = 'https://github.com/therealOri/Hyperion'
 __license__ = 'EPL-2.0'
 
 __code__ = 'print("Hello world!")'
@@ -479,7 +478,7 @@ if __name__ == '__main__':
         elif {self._rand_bool(False)}:
             {self._rand_pass(line = False)}
 """.strip()
-        
+
 
 
 
@@ -487,13 +486,13 @@ if __name__ == '__main__':
 
     class StarImport(Exception):
         def __init__(self):
-            super().__init__("Star Import is forbidden, please update your script")
+            super().__init__('Star Import or "wildcard" Import is forbidden, please update your script and try again.')
 
 
 
     # All
 
-    
+
     def _verify_lin(self, content):
         return all(lin.strip() not in ['(','[','{','}',']',')'] for lin in content.splitlines())
 
@@ -513,7 +512,7 @@ if __name__ == '__main__':
             ''.join(choice(('J','I','L')) for _ in range(randint(17, 25))),
             ''.join(choice(('j','i','l')) for _ in range(randint(17, 25)))
         ))
-    
+
     def _randvar2(self):
         return ''.join(choice('therealOriBillythegoat356BlueRed') for _ in range(randint(5, 20)))
 
@@ -524,7 +523,7 @@ if __name__ == '__main__':
             self.vars
         ))
 
-    
+
     def _protect(self, var, basic=False, r=0, char=1):
         char = "'" if char == 1 else '"'
         if basic:
@@ -542,7 +541,7 @@ if __name__ == '__main__':
         protected = self._protect(lib, r=2, basic=True)
         return f"{self.getattr}({self.__import__}({protected}),{self.dir}({self.__import__}({protected}))[{self.dir}({self.__import__}({protected})).index({self._protect(var, r=2, basic=True)})])"
 
-    
+
     # CreateVars
 
     @property
@@ -552,7 +551,7 @@ if __name__ == '__main__':
         self.getattr = self._randvar()
 
         self.exec = self._randvar()
-        
+
         self.eval = self._randvar()
         self.compile = self._randvar()
         self.join = self._randvar()
@@ -562,7 +561,7 @@ if __name__ == '__main__':
         self.str = self._randvar()
         self.float = self._randvar()
         self.unhexlify = self._randvar()
-        
+
 
         imports = {
             self._protect_built('eval'): self.eval,
@@ -609,7 +608,7 @@ if __name__ == '__main__':
         return all(string.lower() not in func for func in funcs)
 
     def _check_fstring(self, string):
-        
+
         fstrings = findall(r'{[' + self._fstring_legal_chars + r']*}', self.content.lower())
         return all(string.lower() not in fstring for fstring in fstrings)
 
@@ -621,9 +620,9 @@ if __name__ == '__main__':
                 token = self.tokens[self.tokens.index(token)-2]
             else:
                 break
-            
+
         return token.string not in self.imports
-    
+
     def _is_exact_library(self, token: str):
         ntoken = token
         while True:
@@ -631,9 +630,9 @@ if __name__ == '__main__':
                 token = self.tokens[self.tokens.index(token)-2]
             else:
                 break
-            
+
         return ntoken == token
-    
+
     @property
     def _gather_funcs(self):
         lins = [lin.strip().split('(')[1] for lin in self.content.splitlines() if lin.strip().split(' ')[0]=='def']
@@ -669,7 +668,7 @@ if __name__ == '__main__':
             string = self._randvar()
         self.strings[string] = obf
         return string
-    
+
     def _obf_str(self, string):
         obf, do = self._adv_str(string)
         if do:
@@ -691,9 +690,9 @@ if __name__ == '__main__':
             rnum = randint(0, string)
             x = string - rnum
             return f"{self.eval}({self._protect(f'{self._underscore_int(x)}-(-{self._underscore_int(rnum)})')})"
-    
+
     def _adv_str(self, string):
-    
+
         var = f"""{self.eval}({self._protect(string, r=1)})"""
         if (string.replace('b','').replace('u','').replace('r','').replace('f','')[0] == '"' and string.split('"')[0].count('f') != 0) or (string.replace('b','').replace('u','').replace('r','').replace('f','')[0] == "'" and string.split("'")[0].count('f') != 0):
             return var, False
@@ -716,7 +715,7 @@ if __name__ == '__main__':
             if content == self.content:
                 break
             self.content = content
-    
+
     def CompressIndentations(self):
         # a refaire
         ...
@@ -741,7 +740,7 @@ if __name__ == '__main__':
             else:
                 break
         return s
-    
+
     def _add_lambdas(self):
         for _ in range(10):
             lamb = self._randvar()
@@ -751,7 +750,7 @@ if __name__ == '__main__':
 
     def _fake_lin(self, indent):
         return f"{' ' * indent}if {choice(list(self.ostrings.keys()))}:\n{' ' * indent * 2 if indent else ' '}{choice(self.lambdas)}({choice(list(self.ostrings.keys()))})"
-        
+
     # Shell
 
     def _get_chunks(self):
@@ -759,12 +758,12 @@ if __name__ == '__main__':
         lines = self.content.splitlines()
 
         chunk = []
-    
+
         for lin, nextlin in zip(lines, range(len(lines))):
             chunk.append(lin)
             if nextlin+1 == len(lines):
                 break
-            
+
             if (
                 self._get_indentations(lines[nextlin+1]) == 0 and
                 self._get_first_statement(lines[nextlin+1]) not in ('elif', 'else', 'except', 'finally') and
@@ -772,7 +771,7 @@ if __name__ == '__main__':
             ):
                 chunks.append('\n'.join(chunk))
                 chunk = []
-            
+
 
         if chunk:
             chunks.append('\n'.join(chunk))
@@ -799,10 +798,10 @@ if __name__ == '__main__':
 
     def _rand_type(self):
         return choice(('type', 'None', 'Ellipsis', 'True', 'False', 'str', 'int', 'float', 'bool'))
-    
+
     def _rand_int(self):
         return randint(-100000, 100000)
-    
+
     def _rand_op(self):
         return choice(('+', '-', '*', '/'))
 
@@ -866,7 +865,7 @@ if {self._rand_bool(False)}:
                     'var3', gen2[randint(11, 17)]
                 )
             ]).strip()
-    
+
     def _rand_error(self):
         return choice((
             'OSError',
@@ -897,7 +896,7 @@ if {self._rand_bool(False)}:
 
 
 
-    
+
 from pystyle import *
 from time import sleep, time
 from getpass import getpass
@@ -905,12 +904,12 @@ from getpass import getpass
 
 text = r"""
 
- ▄  █ ▀▄    ▄ █ ▄▄  ▄███▄   █▄▄▄▄ ▄█ ████▄    ▄         
-█   █   █  █  █   █ █▀   ▀  █  ▄▀ ██ █   █     █        
-██▀▀█    ▀█   █▀▀▀  ██▄▄    █▀▀▌  ██ █   █ ██   █       
-█   █    █    █     █▄   ▄▀ █  █  ▐█ ▀████ █ █  █       
-   █   ▄▀      █    ▀███▀     █    ▐       █  █ █       
-  ▀             ▀            ▀             █   ██       
+ ▄  █ ▀▄    ▄ █ ▄▄  ▄███▄   █▄▄▄▄ ▄█ ████▄    ▄
+█   █   █  █  █   █ █▀   ▀  █  ▄▀ ██ █   █     █
+██▀▀█    ▀█   █▀▀▀  ██▄▄    █▀▀▌  ██ █   █ ██   █
+█   █    █    █     █▄   ▄▀ █  █  ▐█ ▀████ █ █  █
+   █   ▄▀      █    ▀███▀     █    ▐       █  █ █
+  ▀             ▀            ▀             █   ██
 """[:-1]
 
 banner = """
@@ -958,7 +957,7 @@ def main():
     print()
     print(Colorate.Diagonal(Colors.DynamicMIX((purple, dark)), Center.XCenter(banner)))
     print('\n')
-    file_path = input(stage(f"Drag the file you want to obfuscate {dark}-> {Col.reset}", "?", col2 = bpurple)).replace('\\', ' ').strip().replace('"','').replace("'","")
+    file_path = input(stage(f"Drag the file you want to obfuscate here: {dark}-> {Col.reset}", "?", col2 = bpurple)).replace('\\', ' ').strip().replace('"','').replace("'","")
     print('\n')
 
 
@@ -977,7 +976,7 @@ def main():
     skiprenaming = input(stage(f"Skip the renaming of libraries and variables {dark}[{light}y{dark}/{light}n{dark}] -> {Col.reset}", "?")).replace('"','').replace("'","") == 'y'
     print()
     skipchunks = input(stage(f"Skip the protection of chunks {dark}[{light}y{dark}/{light}n{dark}] -> {Col.reset}", "?")).replace('"','').replace("'","") == 'y'
-    # camouflate = input(stage(f"Camouflate the final code to make it less suspicious {dark}[{light}y{dark}/{light}n{dark}] {Col.reset}", "?")).replace('"','').replace("'","") == 'y'
+
 
     renvars, renlibs = (False, False) if skiprenaming else (True, True)
     randlines, shell = (False, False) if skipchunks else (True, True)
@@ -989,11 +988,39 @@ def main():
     script = Hype.content
     now = round(time() - now, 2)
 
-    with open(f'obf-{filename}', mode='w') as f:
+    with open(filename, mode='w') as f:
         f.write(script)
-    
+
+    #Patch for strings being to long and preventing a weird issue where nothing would happen when running code. (Even after compiling with nuitka)
+    #Don't use pyinstaller.
+    # Set to "True" if you want to use this patch.
+    patch=False
+    if patch == True:
+        chunk_size = 64
+        with open(filename, 'rb') as rb:
+            obf_code = rb.read()
+            encoded_obf_code = base64.b64encode(obf_code)
+
+        chunks = [encoded_obf_code[i:i+chunk_size] for i in range(0, len(encoded_obf_code), chunk_size)]
+        code2 = '''
+import base64
+stuff = []
+'''
+        for i, chunk in enumerate(chunks):
+            code2 += f'stuff.append("{chunk.decode()}")\n'
+
+        code2 += '''
+full_stuff = "".join(stuff)
+full_stuff_bytes = full_stuff.encode()
+more_stuff = base64.b64decode(full_stuff_bytes).decode()
+exec(more_stuff)
+'''
+        code2 = code2.lstrip()
+        with open(filename, 'w') as wf:
+            wf.write(code2)
+
     print('\n')
-    print(stage(f'Press "Enter" to exit...{light}{bpurple}.{Col.reset}', "!!", col2 = bpurple))
+    print(stage(f'Press "Enter" to continue...{light}{bpurple}.{Col.reset}', "!!", col2 = bpurple))
     getpass(stage(f"Obfuscation completed succesfully in {light}{now}s{bpurple}.{Col.reset}", "?", col2 = bpurple))
     # dire aussi l ancienne et nouvelle taille du fichier
 
